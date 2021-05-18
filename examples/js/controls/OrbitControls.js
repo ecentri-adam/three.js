@@ -816,8 +816,8 @@
 
 				if ( state !== STATE.NONE ) {
 
-					scope.domElement.ownerDocument.addEventListener( 'pointermove', onPointerMove );
-					scope.domElement.ownerDocument.addEventListener( 'pointerup', onPointerUp );
+					scope.domElement.addEventListener( 'pointermove', onPointerMove );
+					scope.domElement.addEventListener( 'pointerup', onPointerUp );
 					scope.dispatchEvent( _startEvent );
 
 				}
@@ -852,8 +852,8 @@
 
 			function onMouseUp( event ) {
 
-				scope.domElement.ownerDocument.removeEventListener( 'pointermove', onPointerMove );
-				scope.domElement.ownerDocument.removeEventListener( 'pointerup', onPointerUp );
+				scope.domElement.removeEventListener( 'pointermove', onPointerMove );
+				scope.domElement.removeEventListener( 'pointerup', onPointerUp );
 				if ( scope.enabled === false ) return;
 				handleMouseUp( event );
 				scope.dispatchEvent( _endEvent );
