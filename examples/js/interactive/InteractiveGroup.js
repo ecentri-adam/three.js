@@ -31,11 +31,36 @@
 					const intersection = intersects[ 0 ];
 					const object = intersection.object;
 					const uv = intersection.uv;
-					_event.type = event.type;
 
 					_event.data.set( uv.x, 1 - uv.y );
-
-					object.dispatchEvent( _event );
+					
+					// dispatch both pointer and mouse events for compatibility dat.GUI v0.7.7
+					switch(event.type) {
+						case 'pointerdown':
+						case 'mousedown';
+							_event.type = 'pointerdown';
+							object.dispatchEvent( _event );
+							_event.type = 'mousedown';
+							object.dispatchEvent( _event );
+							break;
+						case 'pointerup':
+						case 'mouseup':
+							_event.type = 'pointerup';
+							object.dispatchEvent( _event );
+							_event.type = 'mouseup';
+							object.dispatchEvent( _event );
+							break;
+						case 'pointermove':
+						case 'mousemove':
+							_event.type = 'pointermove'
+							object.dispatchEvent( _event );
+							_event.type = 'mousemove'
+							object.dispatchEvent( _event );
+							break;
+						default:
+							_event.type = event.type;
+							object.dispatchEvent( _event );
+					};
 
 				}
 
